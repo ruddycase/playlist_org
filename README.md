@@ -4,7 +4,7 @@ Organize an audio playlist optimized for [SanDisk Clip Jam MP3 Player](./docs/cl
 
 ## The Problem(s)
 
-I own a lot of audio books on CDs. Audio books always come with multiple CDs. Each CD typically has a dozen or so MP3s. I want to listen to those MP3s on my audio player. When I rip the CD using Windows Media Player it will create a folder and place the tracks on that CD into the folder. In the below example I have burned three CDs; each CD generates it own folder and each track in that folder starts at track 1 through track N.
+I own a lot of audio books on CDs. Audio books always come with multiple CDs. Each CD typically has a dozen or so MP3s. I want to listen to those MP3s on my audio player. When I rip the CD using Windows Media Player it will create a folder and place the tracks on that CD into the folder. In the below example I have burned three CDs; each CD generates its own folder and each track in that folder starts at track 1 through track n.
 
 ![Data Input](./docs/problem.png "Data Input")
 
