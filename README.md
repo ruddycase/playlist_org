@@ -16,14 +16,14 @@ One additional problem is that the player can, at most, have 128 tracks in a sin
 
 ## The Solution
 
-This program, [audio.py](./organizer/audio.py), will address the problems outlined above. First and foresmost a little setup is needed. This [configuration file](./organizer/config.py) must be specify the source MP3s directory, the directory where the generated MP3s should be placed, and the maximum number of tracks allowed (again this specific player has a maxium of 128).
+This program, [audio.py](./organizer/audio.py), will address the problems outlined above. First and foresmost a little setup is needed. This [configuration file](./organizer/config.py) must specify the source MP3s directory, the directory where the generated MP3s should be placed, and the maximum number of tracks allowed (again this specific player has a maxium of 128).
 Once this one-time setup is complete we can run our program which will move/rename files (using a transient file for bookkeeping) from their source directory into the destination directory resulting in the following:
 
 ![Data Transition](./docs/transition.png "Data Transition")
 
-If necessary we'll have to combine tracks if we are going to go over 128. So for instance if we have 130 MP3s in our destination folder, we'll combine tracks #1 and #2 together, then tracks #3 and #4, and so on for a new, acceptable total of 75 tracks.
+If necessary the tracks will need to be combined if there are more than the maximum limit specified in the configuration file. For instance if there are 130 MP3s in our destination folder, combine tracks #1 and #2 together, then tracks #3 and #4, and so on for a new, acceptable total of 75 tracks.
 
-Once completed we can now copy the folder onto our device via usb cable and enjoy our audio book!
+Once completed, copy the folder onto the device via usb cable and enjoy the audio book!
 
 ## Runbook
 
