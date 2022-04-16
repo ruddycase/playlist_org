@@ -4,7 +4,7 @@ import config
 from pathlib import Path
 
 
-def set_track_name(current_count):
+def _set_track_name(current_count):
     if current_count < 10:
         track_name = f"track_0{current_count}{config.FILE_EXT}"
     else:
@@ -12,9 +12,9 @@ def set_track_name(current_count):
     return track_name
 
 
-def calc_merge_track_num(num_tracks: int) -> int:
+def _calc_merge_track_num(num_tracks: int) -> int:
     """calculate the number of tracks to concatenate so that
-    the final number of tracks generated is less than 128"""
+    the final number of tracks generated is less than MAX_TRACKS"""
     merge_num = 1
     seeking_merge_num = True
     while seeking_merge_num:
@@ -24,21 +24,21 @@ def calc_merge_track_num(num_tracks: int) -> int:
     return merge_num
 
 
-def get_ordered_dirs(dir):
+def _get_ordered_dirs(dir):
     """order dirs by creation time"""
     return sorted(os.listdir(dir), key=lambda fn:os.path.getctime(os.path.join(dir, fn)))
 
 
-def main():
-    for cd_dir in get_ordered_dirs(config.SRC_DIR):
-        full_cd_dir = os.path.join(config.SRC_DIR, cd_dir)
+def _generate_sequential_tracks(src_dir: str, dest_dir: str) -> None:
+    for cd_dir in _get_ordered_dirs(src_dir):
+        full_cd_dir = os.path.join(src_dir, cd_dir)
         last_track = 0
-        if os.path.isdir(config.DEST_DIR):
+        if os.path.isdir(dest_dir):
             if os.path.isfile(config.CONTINUATION_FILE):
                 with open(config.CONTINUATION_FILE, "r") as file:
                     last_track = int(file.read())
         else:
-            Path(config.DEST_DIR).mkdir(parents=True, exist_ok=True)
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
 
         new_last_track = 0
         ordered_tracks = sorted(os.listdir(full_cd_dir), key=len)
@@ -46,21 +46,19 @@ def main():
             src_file = os.path.join(full_cd_dir, filename)
             track_num = last_track + idx
             new_last_track = track_num
-            new_filename = set_track_name(track_num)
-            dest_file = os.path.join(config.DEST_DIR, new_filename)
+            new_filename = _set_track_name(track_num)
+            dest_file = os.path.join(dest_dir, new_filename)
             os.rename(src_file, dest_file)
 
-        new_last_track = str(new_last_track)
         with open(config.CONTINUATION_FILE, "w") as file:
-            file.write(new_last_track)
+            file.write(str(new_last_track))
 
-    if os.path.exists(config.CONTINUATION_FILE):
-        os.remove(config.CONTINUATION_FILE)
+
+def _combine_tracks(dir: str, num_to_merge: int) -> None:
     audio_set_counter = 0
     counter = 0
     audio_set = None
-    ordered_tracks = sorted(os.listdir(config.DEST_DIR), key=len)
-    num_tracks_to_merge = calc_merge_track_num(len(ordered_tracks))
+    ordered_tracks = sorted(os.listdir(dir), key=len)
     for track in ordered_tracks:
         counter = counter + 1
         if audio_set:
@@ -70,21 +68,37 @@ def main():
             audio_set = open(os.path.join(config.DEST_DIR, track), "rb").read()
             os.remove(os.path.join(config.DEST_DIR, track))
             continue
-        if counter % num_tracks_to_merge == 0:
+        if counter % num_to_merge == 0:
             audio_set_counter = audio_set_counter + 1
-            set_name = set_track_name(audio_set_counter)
+            set_name = _set_track_name(audio_set_counter)
             with open(os.path.join(config.DEST_DIR, set_name), "wb") as file:
                 file.write(audio_set)
             audio_set = None
 
     if audio_set:
         audio_set_counter = audio_set_counter + 1
-        set_name = set_track_name(audio_set_counter)
+        set_name = _set_track_name(audio_set_counter)
         with open(os.path.join(config.DEST_DIR, set_name), "wb") as file:
             file.write(audio_set)
         audio_set = None
+
+
+def main():
+    print("Generating tracks...")
+    _generate_sequential_tracks(config.SRC_DIR, config.DEST_DIR)
+
+    with open(config.CONTINUATION_FILE, "r") as file:
+        last_track = int(file.read())
+    if os.path.exists(config.CONTINUATION_FILE):
+        os.remove(config.CONTINUATION_FILE)
+
+    if last_track > config.MAX_TRACKS:
+        print("Combining tracks...")
+        _combine_tracks(config.DEST_DIR, _calc_merge_track_num(last_track))
+
     print(f"Successfully created tracks at {config.DEST_DIR}")
     print(f"Please remove {config.SRC_DIR}")
+
 
 if __name__ == "__main__":
     main()
