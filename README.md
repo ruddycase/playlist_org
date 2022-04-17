@@ -37,19 +37,27 @@ Once completed, copy the folder onto the device via usb cable and enjoy the audi
 cd organizer
 python audio.py
 ```
+## Local Development
 
-## Testing
+### Setup
+
+Install development project dependencies
+```bash
+pip install -r requirements_dev.txt
+```
+
+### Testing
 
 The unittest module is used for all testing purposes.
 
-### Execute all tests
+#### Execute all tests
 
 ```bash
 cd organizer
 python -m unittest discover
 ```
 
-### Execute singular test
+#### Execute singular test
 
 ```bash
 python -m unittest tests.test_basic

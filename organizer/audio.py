@@ -8,7 +8,7 @@ def _set_track_name(current_count):
     if current_count < 10:
         track_name = f"track_0{current_count}{config.FILE_EXT}"
     else:
-        track_name = f"track_{current_count}{config.FILE_EXT}" 
+        track_name = f"track_{current_count}{config.FILE_EXT}"
     return track_name
 
 
@@ -19,14 +19,14 @@ def _calc_merge_track_num(num_tracks: int) -> int:
     seeking_merge_num = True
     while seeking_merge_num:
         merge_num = merge_num + 1
-        if(num_tracks/merge_num<config.MAX_TRACKS):
+        if(num_tracks / merge_num < config.MAX_TRACKS):
             seeking_merge_num = False
     return merge_num
 
 
 def _get_ordered_dirs(dir):
     """order dirs by creation time"""
-    return sorted(os.listdir(dir), key=lambda fn:os.path.getctime(os.path.join(dir, fn)))
+    return sorted(os.listdir(dir), key=lambda fn: os.path.getctime(os.path.join(dir, fn)))
 
 
 def _generate_sequential_tracks(src_dir: str, dest_dir: str) -> None:
@@ -62,7 +62,8 @@ def _combine_tracks(dir: str, num_to_merge: int) -> None:
     for track in ordered_tracks:
         counter = counter + 1
         if audio_set:
-            audio_set = audio_set + open(os.path.join(config.DEST_DIR, track), "rb").read()
+            audio_set = audio_set + \
+                open(os.path.join(config.DEST_DIR, track), "rb").read()
             os.remove(os.path.join(config.DEST_DIR, track))
         else:
             audio_set = open(os.path.join(config.DEST_DIR, track), "rb").read()
