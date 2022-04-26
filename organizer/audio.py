@@ -4,7 +4,7 @@ import config
 from pathlib import Path
 
 
-def _set_track_name(current_count):
+def _set_track_name(current_count: int):
     if current_count < 10:
         track_name = f"track_0{current_count}{config.FILE_EXT}"
     else:
@@ -12,20 +12,34 @@ def _set_track_name(current_count):
     return track_name
 
 
-def _calc_merge_track_num(num_tracks: int) -> int:
-    """calculate the number of tracks to concatenate so that
-    the final number of tracks generated is less than MAX_TRACKS"""
+def _calc_merge_track_num(num_tracks: int, max_tracks: int) -> int:
+    """Calculate the number of tracks to concatenate
+    so that the final number of tracks generated is less than MAX_TRACKS
+
+    Args:
+        num_tracks (int): The total number of tracks
+
+    Returns:
+        int: The number of tracks to merge
+    """
     merge_num = 1
     seeking_merge_num = True
     while seeking_merge_num:
         merge_num = merge_num + 1
-        if(num_tracks / merge_num < config.MAX_TRACKS):
+        if(num_tracks / merge_num < max_tracks):
             seeking_merge_num = False
     return merge_num
 
 
 def _get_ordered_dirs(dir):
-    """order dirs by creation time"""
+    """_summary_
+
+    Args:
+        dir (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     return sorted(os.listdir(dir), key=lambda fn: os.path.getctime(os.path.join(dir, fn)))
 
 
@@ -49,6 +63,17 @@ def _generate_sequential_tracks(src_dir: str, dest_dir: str) -> None:
             new_filename = _set_track_name(track_num)
             dest_file = os.path.join(dest_dir, new_filename)
             os.rename(src_file, dest_file)
+
+
+
+
+
+
+
+
+
+
+
 
         with open(config.CONTINUATION_FILE, "w") as file:
             file.write(str(new_last_track))
@@ -95,7 +120,7 @@ def main():
 
     if last_track > config.MAX_TRACKS:
         print("Combining tracks...")
-        _combine_tracks(config.DEST_DIR, _calc_merge_track_num(last_track))
+        _combine_tracks(config.DEST_DIR, _calc_merge_track_num(last_track, config.MAX_TRACKS))
 
     print(f"Successfully created tracks at {config.DEST_DIR}")
     print(f"Please remove {config.SRC_DIR}")
