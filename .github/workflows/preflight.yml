@@ -22,6 +22,6 @@ jobs:
       run: |
         flake8 $(git ls-files '*.py')
     - name: Run Tests
-        run: |
-          cd organizer
-          python -m unittest discover
+      run: |
+        cd organizer
+        python -m unittest discover
