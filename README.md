@@ -62,3 +62,11 @@ python -m unittest discover
 ```bash
 python -m unittest tests.test_basic
 ```
+
+### Continuous Integration
+
+#### Github Actions
+
+[Github Actions](https://github.com/features/actions) is triggered on every push to run all unit test and lint all python files.
+
+Github Actions History - https://github.com/ruddycase/playlist_org/actions
