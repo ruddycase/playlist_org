@@ -1,4 +1,4 @@
-name: Lint
+name: CI
 
 on: [push]
 
@@ -21,3 +21,7 @@ jobs:
     - name: Analysing the code with flake8
       run: |
         flake8 $(git ls-files '*.py')
+    - name: Run Tests
+        run: |
+          cd organizer
+          python -m unittest discover
