@@ -64,17 +64,6 @@ def _generate_sequential_tracks(src_dir: str, dest_dir: str) -> None:
             dest_file = os.path.join(dest_dir, new_filename)
             os.rename(src_file, dest_file)
 
-
-
-
-
-
-
-
-
-
-
-
         with open(config.CONTINUATION_FILE, "w") as file:
             file.write(str(new_last_track))
 
