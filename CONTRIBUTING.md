@@ -58,7 +58,7 @@ Before creating bug reports, please check [this list](#before-submitting-a-bug-r
 
 #### How Do I Submit A (Good) Bug Report?
 
-Bugs are tracked as [GitHub issues](https://github.com/ruddycase/playlist_org/issues). Create an issue and provide the following information by filling in [the template][bug-report].
+Bugs are tracked as [GitHub issues](https://github.com/ruddycase/playlist_org/issues). Create an issue by filling in [the template][bug-report].
 
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
@@ -92,7 +92,7 @@ Before creating enhancement suggestions, please check [this list](#before-submit
 
 #### How Do I Submit A (Good) Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](https://github.com/ruddycase/playlist_org/issues).Provide the following information:
+Enhancement suggestions are tracked as [GitHub issues](https://github.com/ruddycase/playlist_org/issues). Create a suggestion by filling in [the template][feature-request].
 
 * **Use a clear and descriptive title** for the issue to identify the suggestion.
 * **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
@@ -174,5 +174,5 @@ All Python code is linted with [Flake8](https://flake8.pycqa.org/en/latest/).
 
 [beginner]:https://github.com/search?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3Abeginner+label%3Ahelp-wanted+user%3Aruddycase+sort%3Acomments-desc
 [help-wanted]:https://github.com/search?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted+user%3Aruddycase+sort%3Acomments-desc+-label%3Abeginner
-[bug-report]:https://github.com/ruddycase/playlist_org/blob/main/.github/ISSUE_TEMPLATE/bug_report.md
-[feature-request]:https://github.com/ruddycase/playlist_org/blob/main/.github/ISSUE_TEMPLATE/feature_request.md
+[bug-report]:https://github.com/ruddycase/playlist_org/issues/new?assignees=&labels=&template=bug_report.md
+[feature-request]:https://github.com/ruddycase/playlist_org/issues/new?assignees=&labels=&template=feature_request.md
