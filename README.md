@@ -34,7 +34,7 @@ Once completed, copy the folder onto the device via usb cable and enjoy the audi
 
 ## Community
 
- * [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+ * [Code of Conduct](CODE_OF_CONDUCT.md)
  * [Contribute](CONTRIBUTING.md)
  * [To submit a bug](./CONTRIBUTING.md#reporting-bugs)
  * [To submit a feature](./CONTRIBUTING.md#suggesting-enhancements)
