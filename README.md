@@ -2,7 +2,14 @@
 
 Organize an audio playlist optimized for [SanDisk Clip Jam MP3 Player](./docs/clipjam.pdf)
 
-## The Problem(s)
+## Table of Contents
+1. [The Problem](#the-Problem)
+2. [The Solution](#the-solution)
+3. [Community](#community)
+4. [Runbook](#runbook)
+5. [Local Development](#local-development)
+
+## The Problem
 
 I own a lot of audio books on CDs. Audio books always come with multiple CDs. Each CD typically has a dozen or so MP3s. I want to listen to those MP3s on my audio player. When I rip the CD using Windows Media Player it will create a folder and place the tracks on that CD into the folder. In the below example I have burned three CDs; each CD generates its own folder and each track in that folder starts at track 1 through track n.
 
@@ -24,6 +31,14 @@ Once this one-time setup is complete we can run our program which will move/rena
 If necessary the tracks will need to be combined if there are more than the maximum limit specified in the configuration file. For instance if there are 130 MP3s in our destination folder, combine tracks #1 and #2 together, then tracks #3 and #4, and so on for a new, acceptable total of 75 tracks.
 
 Once completed, copy the folder onto the device via usb cable and enjoy the audio book!
+
+## Community
+
+ * [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+ * [Contribute](CONTRIBUTING.md)
+ * [To submit a bug](./CONTRIBUTING.md#reporting-bugs)
+ * [To submit a feature](./CONTRIBUTING.md#suggesting-enhancements)
+ * [To ask questions, comment, etc](https://github.com/ruddycase/playlist_org/discussions)
 
 ## Runbook
 
